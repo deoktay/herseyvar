@@ -1,5 +1,6 @@
 package com.spring.herseyvar.entities;
 
+import com.spring.herseyvar.enums.Gender;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +18,7 @@ public class CustomerEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "customer_id", unique = true, nullable = false, updatable = false)
+    @Column(name = "customer_id", unique = true, nullable = false)
     private Long id;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -36,6 +37,9 @@ public class CustomerEntity {
 
     @Column(name = "telephone", length = 12)
     private String telephone;
+
+    @Column(name = "gender")
+    private Gender gender;
 
     @OneToOne(cascade = CascadeType.DETACH, mappedBy = "customer", fetch = FetchType.LAZY)
     private UserEntity user;

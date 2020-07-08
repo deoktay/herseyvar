@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Data
 public class SignUpRequest {
+
     private String email;
     private String password;
     private String firstName;
@@ -17,4 +18,5 @@ public class SignUpRequest {
     private boolean isEnabled=true;
     private Date createdAt = DateUtils.createNow().getTime();
     private String createdBy = "Client / User";
+
 }

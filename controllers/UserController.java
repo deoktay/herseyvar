@@ -44,7 +44,7 @@ public class UserController {
 
     @GetMapping("/login")
     public String loginPage() {
-        return "user/Login";
+        return "user/LoginForm";
     }
 
     @PostMapping("/login")
@@ -60,7 +60,7 @@ public class UserController {
         if (authentication != null)
             new SecurityContextLogoutHandler().logout(request, response, authentication);
 
-        return "user/Login";
+        return "user/LoginForm";
     }
 
 }

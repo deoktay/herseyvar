@@ -1,6 +1,7 @@
 package com.spring.herseyvar.dtos;
 
 import com.spring.herseyvar.entities.CustomerEntity;
+import com.spring.herseyvar.enums.Gender;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,6 +17,7 @@ public class Customer {
     private String firstName;
     private String lastName;
     private String telephone;
+    private Gender gender;
 
     public Customer(CustomerEntity entity) {
         this.customerId = entity.getId();
@@ -24,5 +26,7 @@ public class Customer {
         this.firstName = entity.getFirstName();
         this.lastName = entity.getLastName();
         this.telephone = entity.getTelephone();
+        this.gender = entity.getGender();
     }
+
 }

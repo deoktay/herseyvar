@@ -11,7 +11,6 @@ public class UserMapper {
         UserEntity entity = new UserEntity();
         entity.setEmail(request.getEmail());
         entity.setPassword(request.getPassword());
-        entity.setGender(request.getGender());
         entity.setEnabled(request.isEnabled());
         entity.setCustomer(customerEntity);
         return entity;
