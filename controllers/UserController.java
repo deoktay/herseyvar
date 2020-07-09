@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.annotation.Resource;
@@ -23,14 +24,14 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/signup")
+    @GetMapping("/uyeol")
     public String signUpPage(Model model) {
         model.addAttribute("user", new SignUpRequest());
         return "user/SignUpForm";
     }
 
-    @PostMapping("/signup")
-    public String processSignUpPage(@Validated SignUpRequest signUpRequest, BindingResult bindingResult) {
+    @PostMapping("/uyeol")
+    public String processSignUpPage(@ModelAttribute("user") @Validated SignUpRequest signUpRequest, BindingResult bindingResult) {
 
         SignUpResponse response = userService.signUp(signUpRequest);
 

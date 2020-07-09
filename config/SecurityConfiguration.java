@@ -30,7 +30,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(RESOURCES)
                 .permitAll()
-                .antMatchers("/signup")
+                .antMatchers("/uyeol")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

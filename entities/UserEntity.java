@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,14 +20,13 @@ public class UserEntity {
     @Column(name = "user_id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "email", length = 50, nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(name = "password", nullable = false)
-    @Size(min = 7, max = 15, message = "Şifreniz 7-15 karakter arasında olmalıdır, harf ve rakam içermelidir.")
+    @Column(nullable = false)
     private String password;
 
-    @Column(name = "is_enabled")
+    @Column
     private boolean isEnabled = true;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)

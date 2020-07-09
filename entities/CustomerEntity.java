@@ -29,13 +29,13 @@ public class CustomerEntity {
     @Column(updatable = false)
     private String createdBy;
 
-    @Column(length = 60)
+    @Column
     private String firstName;
 
-    @Column(length = 60)
+    @Column
     private String lastName;
 
-    @Column(name = "telephone", length = 12)
+    @Column
     private String telephone;
 
     @Column(name = "gender")
