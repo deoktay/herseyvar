@@ -22,9 +22,16 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/Hesabim/KullaniciBilgileri")
-    public String customerInfoPage(Model model) {
+    public String customerInfoPage(Model model, @Validated CustomerFormRequest request, @AuthenticationPrincipal UserAuthority loggedUser, BindingResult bindingResult) {
 
-        model.addAttribute("customer", new CustomerFormRequest());
+        request.setEmail(loggedUser.getUsername());
+        CustomerFormResponse response = customerService.getCustomer(request);
+
+        if (!response.isSuccess()) {
+            bindingResult.reject(response.getMessage());
+        }
+
+        model.addAttribute("customer", request);
 
         return "user/CustomerInfoForm";
 

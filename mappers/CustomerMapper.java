@@ -1,5 +1,6 @@
 package com.spring.herseyvar.mappers;
 
+import com.spring.herseyvar.dtos.Customer;
 import com.spring.herseyvar.entities.CustomerEntity;
 import com.spring.herseyvar.models.CustomerFormRequest;
 import com.spring.herseyvar.models.SignUpRequest;
@@ -25,5 +26,13 @@ public class CustomerMapper {
         customerEntity.setTelephone(customerFormRequest.getTelephone());
         customerEntity.setGender(customerFormRequest.getGender());
         return customerEntity;
+    }
+
+    public Customer toCustomerForm(CustomerFormRequest customerFormRequest, Customer customer) {
+        customer.setFirstName(customerFormRequest.getFirstName());
+        customer.setLastName(customerFormRequest.getLastName());
+        customer.setTelephone(customerFormRequest.getTelephone());
+        customer.setGender(customerFormRequest.getGender());
+        return customer;
     }
 }

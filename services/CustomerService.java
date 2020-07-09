@@ -1,5 +1,6 @@
 package com.spring.herseyvar.services;
 
+import com.spring.herseyvar.dtos.Customer;
 import com.spring.herseyvar.entities.CustomerEntity;
 import com.spring.herseyvar.entities.UserEntity;
 import com.spring.herseyvar.mappers.CustomerMapper;
@@ -36,6 +37,30 @@ public class CustomerService {
 
     public void saveCustomer(CustomerEntity customerEntity) {
         customerRepository.save(customerEntity);
+    }
+
+    public CustomerFormResponse getCustomer(CustomerFormRequest customerFormRequest) {
+
+        UserEntity userEntity = userRepository.findByEmail(customerFormRequest.getEmail());
+
+        CustomerEntity customerEntity = getByCustomerId(userEntity.getCustomer().getId());
+
+        Customer customer = new Customer(customerEntity);
+
+        customer = customerMapper.toCustomerForm(customerFormRequest, customer);
+
+        try {
+            customerRepository.findById(customer.getCustomerId());
+            return CustomerFormResponse.builder()
+                    .isSuccess(true)
+                    .build();
+        } catch (Exception ex) {
+            return CustomerFormResponse.builder()
+                    .isSuccess(false)
+                    .message("Beklenmeyen bir hata oluştu. Lütfen daha sonra tekrar deneyiniz.")
+                    .build();
+        }
+
     }
 
     public CustomerFormResponse updateCustomer(CustomerFormRequest customerFormRequest) {
