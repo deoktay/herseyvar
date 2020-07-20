@@ -1,8 +1,11 @@
 package com.spring.herseyvar.controllers;
 
 import com.spring.herseyvar.auth.UserAuthority;
+import com.spring.herseyvar.models.CustomerAddressFormRequest;
+import com.spring.herseyvar.models.CustomerAddressFormResponse;
 import com.spring.herseyvar.models.CustomerFormRequest;
 import com.spring.herseyvar.models.CustomerFormResponse;
+import com.spring.herseyvar.services.CustomerAddressService;
 import com.spring.herseyvar.services.CustomerService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,9 @@ public class CustomerController {
     @Resource
     private CustomerService customerService;
 
+    @Resource
+    private CustomerAddressService customerAddressService;
+
     @GetMapping("/Hesabim/KullaniciBilgileri")
     public String customerInfoPage(Model model, @Validated CustomerFormRequest request, @AuthenticationPrincipal UserAuthority loggedUser, BindingResult bindingResult) {
 
@@ -33,7 +39,7 @@ public class CustomerController {
 
         model.addAttribute("customer", request);
 
-        return "user/CustomerInfoForm";
+        return "customer/CustomerInfoForm";
 
     }
 
@@ -49,5 +55,29 @@ public class CustomerController {
         }
 
         return new RedirectView("/Hesabim/KullaniciBilgileri");
+    }
+
+    @GetMapping("/Hesabim/AdresBilgileri")
+    public String customerAddressPage(Model model, @Validated CustomerAddressFormRequest request, @AuthenticationPrincipal UserAuthority loggedUser) {
+
+        request.setEmail(loggedUser.getUsername());
+
+        customerAddressService.getCustomerAddress(request);
+
+        model.addAttribute("customerAddress", request);
+
+        return "customer/CustomerAddressPage";
+    }
+
+    @GetMapping("/Hesabim/AdresBilgileri/yeni'+'adres'+'ekle")
+    public String customerAddressForm(Model model, @Validated CustomerAddressFormRequest request, @AuthenticationPrincipal UserAuthority loggedUser) {
+
+        request.setEmail(loggedUser.getUsername());
+
+        customerAddressService.getCustomerAddress(request);
+
+        model.addAttribute("customerAddress", request);
+
+        return "customer/CustomerAddressForm";
     }
 }

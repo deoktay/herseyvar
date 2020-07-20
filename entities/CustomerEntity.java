@@ -8,6 +8,8 @@ import org.springframework.data.annotation.CreatedBy;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @NoArgsConstructor
 @Getter
@@ -43,4 +45,7 @@ public class CustomerEntity {
 
     @OneToOne(cascade = CascadeType.DETACH, mappedBy = "customer", fetch = FetchType.LAZY)
     private UserEntity user;
+
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
+    private Set<CustomerAddressEntity> customerAddressList = new HashSet<>();
 }
